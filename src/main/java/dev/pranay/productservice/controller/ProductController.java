@@ -21,7 +21,7 @@ public class ProductController {
     public void getAllProducts() {
 
     }
-
+    //API
     // localhost:8080/products/{id}
     // localhost:8080/products/123
     @GetMapping("{id}")
