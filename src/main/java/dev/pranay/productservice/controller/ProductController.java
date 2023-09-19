@@ -1,11 +1,12 @@
 package dev.pranay.productservice.controller;
 
+import dev.pranay.productservice.dtos.GenericProductDto;
 import dev.pranay.productservice.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/products")
+@RequestMapping("products")
 public class ProductController {
 
     private ProductService productService;
@@ -21,11 +22,11 @@ public class ProductController {
     public void getAllProducts() {
 
     }
-    //API
+
     // localhost:8080/products/{id}
     // localhost:8080/products/123
     @GetMapping("{id}")
-    public String getProductById(@PathVariable("id") Long id){
+    public GenericProductDto getProductById(@PathVariable("id") Long id){
         return productService.getProductById(id);
 
     }
@@ -35,11 +36,11 @@ public class ProductController {
 
     }
 
-//    @PostMapping
-//    public void createProduct(@RequestBody GenericProductDto product) {
-////        System.out.println(product.name);
-//
-//    }
+    @PostMapping
+    public GenericProductDto createProduct(@RequestBody GenericProductDto product) {
+        return productService.createProduct(product);
+
+    }
 
     @PutMapping("{id}")
     public void updateProductById() {
