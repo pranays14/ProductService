@@ -1,6 +1,9 @@
 package dev.pranay.productservice.controller;
 
+
+import dev.pranay.productservice.dtos.ExceptionDto;
 import dev.pranay.productservice.dtos.GenericProductDto;
+import dev.pranay.productservice.exception.NotFoundException;
 import dev.pranay.productservice.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -30,14 +33,18 @@ public class ProductController {
     // localhost:8080/products/{id}
     // localhost:8080/products/123
     @GetMapping("{id}")
-    public GenericProductDto getProductById(@PathVariable("id") Long id){
+    public GenericProductDto getProductById(@PathVariable("id") Long id) throws NotFoundException {
         return productService.getProductById(id);
 
     }
 
+
     @DeleteMapping("{id}")
-    public GenericProductDto deleteProductById(@PathVariable("id") Long id) {
-        return productService.deleteProduct(id);
+    public ResponseEntity<GenericProductDto> deleteProductById(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(
+                productService.deleteProduct(id),
+                HttpStatus.OK
+        );
 
     }
 
