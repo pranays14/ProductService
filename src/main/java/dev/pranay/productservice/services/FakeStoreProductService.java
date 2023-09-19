@@ -7,6 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @Service("fakeStoreProductService")
 public class FakeStoreProductService implements ProductService{
 
@@ -45,6 +49,30 @@ public class FakeStoreProductService implements ProductService{
                 product, GenericProductDto.class);
 
         return response.getBody();
+    }
+
+    @Override
+    public List<GenericProductDto> getAllProducts() {
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        ResponseEntity<FakeStoreProductDto[]> response =
+                restTemplate.getForEntity(productRequestsBaseUrl, FakeStoreProductDto[].class);
+
+        List<GenericProductDto> answer =new ArrayList<>();
+
+        for(FakeStoreProductDto fakeStoreProductDto : Arrays.stream(response.getBody()).toList()){
+            GenericProductDto product = new GenericProductDto();
+
+            product.setId(fakeStoreProductDto.getId());
+            product.setImage(fakeStoreProductDto.getImage());
+            product.setDescription(fakeStoreProductDto.getDescription());
+            product.setTitle(fakeStoreProductDto.getTitle());
+            product.setPrice(fakeStoreProductDto.getPrice());
+            product.setCategory(fakeStoreProductDto.getCategory());
+
+            answer.add(product);
+
+        }
+        return answer;
     }
 
 }
