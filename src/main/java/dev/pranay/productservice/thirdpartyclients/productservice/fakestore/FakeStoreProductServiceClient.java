@@ -3,6 +3,8 @@ package dev.pranay.productservice.thirdpartyclients.productservice.fakestore;
 import dev.pranay.productservice.dtos.GenericProductDto;
 import dev.pranay.productservice.exception.NotFoundException;
 import dev.pranay.productservice.thirdpartyclients.productservice.ThirdPartyProductServiceClient;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +23,26 @@ import java.util.List;
 @Service
 public class FakeStoreProductServiceClient {
     private RestTemplateBuilder restTemplateBuilder;
-    private String specificProductRequestUrl = "https://fakestoreapi.com/products/{id}";
-    private String productRequestsBaseUrl = "https://fakestoreapi.com/products";
+//    private String specificProductRequestUrl = "https://fakestoreapi.com/products/{id}";
+//    private String productRequestsBaseUrl = "https://fakestoreapi.com/products";
 
-    public FakeStoreProductServiceClient(RestTemplateBuilder restTemplateBuilder) {
+    @Value("${fakestore.api.url}")
+    private String fakeStoreApiUrl;
+
+    @Value("${fakestore.api.paths.product}")
+    private String fakeStoreProductsApiPath;
+
+    private String productRequestsBaseUrl;
+    private String specificProductRequestUrl;
+
+    public FakeStoreProductServiceClient(RestTemplateBuilder restTemplateBuilder,
+                                         @Value("${fakestore.api.url}") String fakeStoreApiUrl,
+                                         @Value("${fakestore.api.paths.product}") String fakeStoreProductsApiPath) {
         this.restTemplateBuilder = restTemplateBuilder;
+        this.productRequestsBaseUrl  = fakeStoreApiUrl + fakeStoreProductsApiPath;
+        this.specificProductRequestUrl = fakeStoreApiUrl + fakeStoreProductsApiPath + "/{id}";
     }
+
     private GenericProductDto convertFakeStoreProductIntoGenericProduct(FakeStoreProductDto fakeStoreProductDto) {
 
         GenericProductDto product = new GenericProductDto();
