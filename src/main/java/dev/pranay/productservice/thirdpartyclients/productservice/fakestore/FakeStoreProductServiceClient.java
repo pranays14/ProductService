@@ -6,6 +6,7 @@ import dev.pranay.productservice.thirdpartyclients.productservice.ThirdPartyProd
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -103,5 +104,16 @@ public class FakeStoreProductServiceClient {
                 requestCallback, responseExtractor, id);
 
         return response.getBody();
+    }
+    public FakeStoreProductDto updateProductById(Long id, GenericProductDto product){
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        HttpEntity<GenericProductDto> request = new HttpEntity<GenericProductDto>(product);
+
+
+        ResponseEntity<FakeStoreProductDto> response = restTemplate.exchange(specificProductRequestUrl,
+                HttpMethod.PUT, request, FakeStoreProductDto.class, id);
+
+        return response.getBody();
+
     }
 }
