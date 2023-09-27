@@ -1,9 +1,9 @@
 package dev.pranay.productservice;
 
-import dev.pranay.productservice.inheritencedemo.tableperclass.Mentor;
-import dev.pranay.productservice.inheritencedemo.tableperclass.MentorRepository;
-import dev.pranay.productservice.inheritencedemo.tableperclass.User;
-import dev.pranay.productservice.inheritencedemo.tableperclass.UserRepository;
+import dev.pranay.productservice.inheritencedemo.joinedtable.Mentor;
+import dev.pranay.productservice.inheritencedemo.joinedtable.MentorRepository;
+import dev.pranay.productservice.inheritencedemo.joinedtable.User;
+import dev.pranay.productservice.inheritencedemo.joinedtable.UserRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -28,7 +28,7 @@ public class ProductserviceApplication implements CommandLineRunner {
 
     private final UserRepository userRepository;
 
-    public ProductserviceApplication(@Qualifier("tbc_mr")MentorRepository mentorRepository, @Qualifier("tbc_ur") UserRepository userRepository){
+    public ProductserviceApplication(@Qualifier("jt_mr")MentorRepository mentorRepository, @Qualifier("jt_ur") UserRepository userRepository){
         this.mentorRepository = mentorRepository;
         this.userRepository = userRepository;
     }
