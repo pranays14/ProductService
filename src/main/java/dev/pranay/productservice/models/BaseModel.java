@@ -5,7 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
-@MappedSuperclass
+//@MappedSuperclass
 public class BaseModel {
     @Id
     @GeneratedValue(generator = "uuidgenerator")

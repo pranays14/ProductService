@@ -3,7 +3,7 @@ package dev.pranay.productservice.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
+//@Entity
 @Getter
 @Setter
 @NoArgsConstructor

@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-@Entity(name = "Orders")
+//@Entity(name = "Orders")
 @Getter
 @Setter
 public class Order extends BaseModel{
