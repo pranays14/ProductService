@@ -8,11 +8,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-//@Entity(name = "Orders")
+
+@Entity(name = "orders")
 @Getter
 @Setter
-public class Order extends BaseModel{
-    @ManyToMany
+public class Order extends BaseModel {
+
+    @ManyToMany()
     @JoinTable(
             name = "product_orders",
             joinColumns = @JoinColumn(name = "order_id"),
