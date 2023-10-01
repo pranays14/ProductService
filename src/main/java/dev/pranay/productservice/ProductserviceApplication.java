@@ -61,19 +61,20 @@ public class ProductserviceApplication implements CommandLineRunner {
 
 
         Category category = new Category();
-        category.setName("Apple Devices");
-        Category savedCategory = categoryRepository.save(category);
+        category.setName("Google Devices");
+//        Category savedCategory = categoryRepository.save(category);
 
-        Price price = new Price("Rupee", 50);
-        Price savedPrice = priceRepository.save(price);
+        Price price = new Price("Rupee", 30);
+//        Price savedPrice = priceRepository.save(price);
 
         Product product = new Product();
-        product.setTitle("iPhone 15 Pro");
-        product.setDescription("The best iPhone Ever");
+        product.setTitle("Pixel");
+        product.setDescription("The best Phone Ever");
         product.setCategory(category);
         product.setPrice(price);
 
         productRepository.save(product);
+        productRepository.deleteById(UUID.fromString("a8938c96-9d9d-48d0-8315-0708fb2a2e7e"));
 //        Category category1 = categoryRepository.findById(UUID.fromString("9060a681-0598-4a98-8706-bf2a9f86ce59")).get();
 //        System.out.println("Category name is: " + category1.getName());
 //        System.out.println("Printing all products in the category");
