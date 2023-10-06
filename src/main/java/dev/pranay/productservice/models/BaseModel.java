@@ -1,11 +1,13 @@
 package dev.pranay.productservice.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
 @MappedSuperclass
+@Data
 public class BaseModel {
     @Id
     @GeneratedValue(generator = "uuidgenerator")
